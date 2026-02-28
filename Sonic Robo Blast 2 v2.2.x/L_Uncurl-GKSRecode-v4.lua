@@ -1,7 +1,10 @@
 --Updated Uncurl code by GLide KS
 local UNCURL_LOCKTIME = 8
 local UNCURL_SOUND = sfx_kc3c
-local blacklist = {}
+local blacklist = {} --list of characters that will NOT use uncurl
+local forcelist = { --list of characters that will use uncurl if they're spinning but not using the roll state
+    ["trip"] = true
+}
 
 COM_AddCommand("uncurltoggle", function(p, val)
     local no = (val == "0" or val == "no" or val == "off" or val == "false")
@@ -34,7 +37,7 @@ local function Uncurl(p)
     if mo.uncurl_lock then return end
     if not (mo and mo.health) then return end
     if blacklist[p.mo.skin] then return end
-    if mo.state != S_PLAY_ROLL then return end
+    if not (mo.state == S_PLAY_ROLL or (forcelist[mo.skin] and (p.panim & PA_ROLL))) then return end
     if not P_IsObjectOnGround(mo) then return end
 
     if FixedHypot(mo.momx, mo.momy) >= p.runspeed then
