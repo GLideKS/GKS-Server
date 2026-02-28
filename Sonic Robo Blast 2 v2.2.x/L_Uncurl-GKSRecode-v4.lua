@@ -1,5 +1,6 @@
 --Updated Uncurl code by GLide KS
 local UNCURL_LOCKTIME = 8
+local UNCURL_SOUND = sfx_kc3c
 local blacklist = {}
 
 COM_AddCommand("uncurltoggle", function(p, val)
@@ -42,8 +43,8 @@ local function Uncurl(p)
 		mo.state = S_PLAY_WALK
 	end
     p.pflags = $1 & ~PF_SPINNING
-    S_StartSound(mo, sfx_s3k52) -- Uncurl sound
     S_StopSoundByID(mo,sfx_spin)
+    S_StartSound(mo, UNCURL_SOUND) -- Uncurl sound
     mo.uncurl_lock = UNCURL_LOCKTIME --avoids excessive spam
     return true
 end
