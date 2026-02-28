@@ -1,5 +1,6 @@
 --Updated Uncurl code by GLide KS
 local UNCURL_LOCKTIME = 8
+local blacklist = {}
 
 COM_AddCommand("uncurltoggle", function(p, val)
     local no = (val == "0" or val == "no" or val == "off" or val == "false")
@@ -31,6 +32,7 @@ local function Uncurl(p)
     local mo = p.mo
     if mo.uncurl_lock then return end
     if not (mo and mo.health) then return end
+    if blacklist[p.mo.skin] then return end
     if mo.state != S_PLAY_ROLL then return end
     if not P_IsObjectOnGround(mo) then return end
 
