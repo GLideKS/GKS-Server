@@ -43,7 +43,7 @@ local function Uncurl(p)
 		mo.state = S_PLAY_WALK
 	end
     p.pflags = $1 & ~PF_SPINNING
-    S_StopSoundByID(mo,sfx_spin)
+    S_StopSoundByID(mo, skins[mo.skin].soundsid[SKSSPIN])
     S_StartSound(mo, UNCURL_SOUND) -- Uncurl sound
     mo.uncurl_lock = UNCURL_LOCKTIME --avoids excessive spam
     return true
