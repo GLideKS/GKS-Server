@@ -31,6 +31,7 @@ local function Uncurl(p)
     local mo = p.mo
     if mo.uncurl_lock then return end
     if not (mo and mo.health) then return end
+    if mo.state != S_PLAY_ROLL then return end
     if not P_IsObjectOnGround(mo) then return end
 
     if FixedHypot(mo.momx, mo.momy) >= p.runspeed then
