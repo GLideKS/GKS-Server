@@ -4,6 +4,15 @@ freeslot("S_CONTSWITCH")
 states[S_CONTSWITCH] = {SPR_PLAY, SPR2_CNT1, 8, nil, nil, nil, S_CONTSWITCH}
 local S_CONTSWITCH = S_CONTSWITCH --Optimization reasons
 
+local PST_LIVE = PST_LIVE
+local GTR_RINGSLINGER = GTR_RINGSLINGER
+local PF_JUMPED = PF_JUMPED
+local PF_THOKKED = PF_THOKKED
+local PF_SPINNING = PF_SPINNING
+local MFE_SPRUNG = MFE_SPRUNG
+local pw_carry = pw_carry
+local pw_nocontrol = pw_nocontrol
+
 local function ToggleCnt(p) --toggle continue state activation
 	if p.togglecntoff then
 		p.togglecntoff = false

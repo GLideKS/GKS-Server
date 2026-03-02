@@ -8,6 +8,11 @@ local forcelist = { --list of characters that will use uncurl if they're spinnin
     ["trip"] = true
 }
 
+--Optimize
+local BT_SPIN = BT_SPIN
+local PF_SPINNING = PF_SPINNING
+local PA_ROLL = PA_ROLL
+
 COM_AddCommand("uncurltoggle", function(p, val)
     local no = (val == "0" or val == "no" or val == "off" or val == "false")
     local yes = (val == "1" or val == "yes" or val == "on" or val == "true")
