@@ -50,7 +50,11 @@ local switch = function(p)
         return
     end
 
-    if mo.state == S_CONTSWITCH then p.powers[pw_nocontrol] = -1 end --Disable player control on this state
+    if mo.state == S_CONTSWITCH then
+        if p.speed then p.powers[pw_nocontrol] = -1 --Disable player control on this state
+        elseif (p.cmd.forwardmove or p.cmd.sidemove) then mo.state = S_PLAY_WALK
+        end
+    end
 
     --Do not run the following code if the player is not pressing the button
     if DoingSomething(p) then return end
