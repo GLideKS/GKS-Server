@@ -36,9 +36,8 @@ local switch = function(p)
     if not (p.mo and p.mo.valid and (p.mo.health or p.playerstate & PST_LIVE)) then return end --Is the player even alive
     local mo = p.mo
 
-    if not P_IsObjectOnGround(mo)  --Is the player in the air? switch to fall frames
-    and mo.state == S_CONTSWITCH then
-        mo.state = S_PLAY_FALL
+    if not P_IsObjectOnGround(mo) then --Is the player in the air? switch to fall frames
+        if mo.state == S_CONTSWITCH then mo.state = S_PLAY_FALL end
         return
     end
 
