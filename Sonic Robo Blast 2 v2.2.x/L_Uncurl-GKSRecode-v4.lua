@@ -1,7 +1,9 @@
 --Updated Uncurl code by GLide KS
 local UNCURL_LOCKTIME = 8
 local UNCURL_SOUND = sfx_kc3c
-local blacklist = {} --list of characters that will NOT use uncurl
+local blacklist = { --list of characters that will NOT use uncurl
+    ["adventuresonic"] = true --Already has uncurl
+}
 local forcelist = { --list of characters that will use uncurl if they're spinning but not using the roll state
     ["trip"] = true
 }
