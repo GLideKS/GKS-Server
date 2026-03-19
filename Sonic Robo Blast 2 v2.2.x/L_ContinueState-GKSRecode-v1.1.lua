@@ -4,7 +4,6 @@ freeslot("S_CONTSWITCH")
 states[S_CONTSWITCH] = {SPR_PLAY, SPR2_CNT1, 8, nil, nil, nil, S_CONTSWITCH}
 local S_CONTSWITCH = S_CONTSWITCH --Optimization reasons
 
-local PST_LIVE = PST_LIVE
 local GTR_RINGSLINGER = GTR_RINGSLINGER
 local PF_JUMPED = PF_JUMPED
 local PF_THOKKED = PF_THOKKED
@@ -42,8 +41,11 @@ local BTN = BT_FIRENORMAL --button to press
 local switch = function(p)
     if p.togglecntoff then return end --End the function completely if continue switch is off
     if (gametyperules & GTR_RINGSLINGER) then return end --Do not run this on ringslinger
-    if not (p.mo and p.mo.valid and (p.mo.health or p.playerstate & PST_LIVE)) then return end --Is the player even alive
     local mo = p.mo
+    local cmd = p.cmd
+    local moving = (cmd.forwardmove or cmd.sidemove)
+
+    if not (mo and mo.valid and mo.health) then return end --Is the player even alive
 
     if not P_IsObjectOnGround(mo) then --Is the player in the air? switch to fall frames
         if mo.state == S_CONTSWITCH then mo.state = S_PLAY_FALL end
@@ -52,15 +54,17 @@ local switch = function(p)
 
     if mo.state == S_CONTSWITCH then
         if p.speed then p.powers[pw_nocontrol] = -1 --Disable player control on this state
-        elseif (p.cmd.forwardmove or p.cmd.sidemove) then mo.state = S_PLAY_WALK
+        elseif moving then mo.state = S_PLAY_WALK
         end
     end
 
     --Do not run the following code if the player is not pressing the button
     if DoingSomething(p) then return end
-    if not ((p.cmd.buttons & BTN) and not (p.lastbuttons & BTN)) then return end
 
-    if mo.state != S_CONTSWITCH then mo.state = S_CONTSWITCH
+    if not ((cmd.buttons & BTN) and not (p.lastbuttons & BTN)) then return end
+
+    if mo.state != S_CONTSWITCH then
+        mo.state = S_CONTSWITCH
     else
         if not p.speed then mo.state = S_PLAY_STND
         else mo.state = S_PLAY_WALK end

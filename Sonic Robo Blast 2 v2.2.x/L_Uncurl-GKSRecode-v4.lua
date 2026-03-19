@@ -43,7 +43,7 @@ local function Uncurl(p)
     local mo = p.mo
     if mo.uncurl_lock then return end
     if not (mo and mo.health) then return end
-    if blacklist[p.mo.skin] then return end
+    if blacklist[mo.skin] then return end
     if not (mo.state == S_PLAY_ROLL or (forcelist[mo.skin] and (p.panim & PA_ROLL))) then return end
     if not P_IsObjectOnGround(mo) then return end
 
