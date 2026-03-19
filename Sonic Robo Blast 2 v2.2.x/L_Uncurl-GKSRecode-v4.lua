@@ -1,6 +1,6 @@
 --Updated Uncurl code by GLide KS
-local UNCURL_LOCKTIME = 8
-local UNCURL_SOUND = sfx_kc3c
+local UNCURL_LOCKTIME = 8 --avoids massive spam
+local UNCURL_SOUND = sfx_kc3c --change this if you want to use another sound
 local blacklist = { --list of characters that will NOT use uncurl
     ["adventuresonic"] = true --Already has uncurl
 }
